@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #0B0B0C;
+    --surface: #151517;
+    --surface-raised: #1C1C1F;
+    --foreground: #F2F0E9;
+    --muted: #858585;
+    --line: #303033;
+    --accent: #B9B9B9;
+  }
+
+  [data-theme="light"] {
+    --background: #F3F1EC;
+    --surface: #FFFFFF;
+    --surface-raised: #E9E7E1;
+    --foreground: #171717;
+    --muted: #77736D;
+    --line: #D9D6CF;
+    --accent: #626262;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  /* Anchor targets clear the fixed header when navigated to. */
+  scroll-padding-top: 5rem;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Reduced motion: reveal choreography is skipped in JS as well; here we
+   minimize CSS micro-interactions (hover/focus transitions snap instantly). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--accent), transparent 70%);
+  color: var(--background);
+}
